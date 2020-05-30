@@ -1,4 +1,4 @@
-dist/
+build/
 nbproject/
 config.properties
 GCP.txt

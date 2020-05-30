@@ -22,9 +22,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ProgressIndicator;
@@ -85,6 +83,7 @@ public class HomeController {
         results.remove(Language.SANSKRIT);
         results.remove(Language.TIBETAN);
         results.remove(Language.UIGHUR);
+        results.remove(Language.FILIPINO); // == TAGALOG
         return results;
     }
     
@@ -330,6 +329,7 @@ public class HomeController {
                                     if (!srcLang.equals(destLang)) {
                                         ArrayList<String> valueLines = EncodingManager.parse(value);
                                         for (int i=0; i<valueLines.size(); i++) { //replace each line by it's translation
+                                            if (false)
                                             valueLines.set(i, this.translator.translate(valueLines.get(i), srcLang, destLang));
                                         }
                                         value = valueLines.stream().reduce("", (a,b) -> a + "\n" + b).substring(1);
