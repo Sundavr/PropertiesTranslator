@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import myjavafx.ListViewCheckBox?>
+<?import myjavafx.MyButton?>
+<?import myjavafx.MyComboBox?>
+<?import myjavafx.MyTextField?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="propertiestranslator.HomeController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#changeKeyAction" text="Change key" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteKeyAction" text="Delete key" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <HBox prefHeight="17.0" prefWidth="400.0" />
+      <Label alignment="TOP_LEFT" text="Source file (.properties):" />
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="36.0" />
+            <MyTextField fx:id="srcTextField" HBox.hgrow="SOMETIMES" />
+            <MyButton onAction="#srcButtonAction" text="..." />
+            <Label prefHeight="17.0" prefWidth="36.0" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+         <children>
+            <VBox alignment="CENTER" prefHeight="95.0" prefWidth="119.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <Label contentDisplay="CENTER" text="Source Language:" />
+                  <HBox prefHeight="8.0" prefWidth="100.0" />
+                  <MyComboBox fx:id="srcComboBox" onKeyPressed="#srcKeyPressed" />
+               </children>
+            </VBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="92.0" text="Destination&#10;Languages: &#10;" />
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <ListViewCheckBox fx:id="destListView" onKeyPressed="#destKeyPressed" HBox.hgrow="SOMETIMES" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox prefHeight="10.0" prefWidth="400.0" />
+      <Label alignment="TOP_LEFT" text="Destination directory:" />
+      <HBox alignment="CENTER" prefHeight="46.0" prefWidth="600.0">
+         <children>
+            <Label prefHeight="17.0" prefWidth="36.0" />
+            <MyTextField fx:id="destTextField" HBox.hgrow="SOMETIMES" />
+            <MyButton onAction="#destButtonAction" text="..." />
+            <Label prefHeight="17.0" prefWidth="36.0" />
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+      <HBox alignment="CENTER" prefHeight="57.0" prefWidth="400.0">
+         <children>
+            <MyButton fx:id="translateButton" alignment="CENTER" contentDisplay="CENTER" onAction="#translateAction" text="Translate">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </MyButton>
+            <Label prefHeight="17.0" prefWidth="16.0" />
+            <ProgressBar fx:id="progressBar" prefHeight="26.0" prefWidth="237.0" progress="0.0" HBox.hgrow="SOMETIMES" />
+            <ProgressIndicator fx:id="progressIndicator" prefHeight="40.0" prefWidth="64.0" progress="0.0" />
+         </children>
+      </HBox>
+   </children>
+</VBox>

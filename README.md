@@ -1,0 +1,1 @@
+Traducteur et parseur de fichier properties.
