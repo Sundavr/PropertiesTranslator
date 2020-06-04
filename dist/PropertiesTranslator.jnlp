@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PropertiesTranslator.jar" size="119163" download="eager" />
+    <jar href="PropertiesTranslator.jar" size="119233" download="eager" />
     <jar href="lib\google-api-translate-java-0.97.jar" size="33654" download="eager" />
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="propertiestranslator.MainApp"  name="PropertiesTranslator" />

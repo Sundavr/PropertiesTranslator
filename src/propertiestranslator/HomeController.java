@@ -329,7 +329,6 @@ public class HomeController {
                                     if (!srcLang.equals(destLang)) {
                                         ArrayList<String> valueLines = EncodingManager.parse(value);
                                         for (int i=0; i<valueLines.size(); i++) { //replace each line by it's translation
-                                            if (false)
                                             valueLines.set(i, this.translator.translate(valueLines.get(i), srcLang, destLang));
                                         }
                                         value = valueLines.stream().reduce("", (a,b) -> a + "\n" + b).substring(1);

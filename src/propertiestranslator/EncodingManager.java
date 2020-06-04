@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Encoding manager.
  * @author Johan
+ * TODO ignore case {arg0} ... + vérifier accolades pas enlevés par google (ex: FA (perse) pour "Missed task: ''{0}''")
  */
 public class EncodingManager {
     //prevent EncodingManager constructor calls
@@ -190,9 +191,9 @@ public class EncodingManager {
     /**
      * Parse the given text and transform each argument into arg tag.
      * Args tags are : <br>
-     * {X} -> {argX}<br>
-     * '{X}' -> {sQargX} (for simple quotted arg)<br>
-     * ''{X}'' -> {QargX} (for quotted arg)<br>
+     * {X} -> {@code <argX>}<br>
+     * '{X}' -> {@code <sQargX>} (for simple quotted arg)<br>
+     * ''{X}'' -> {@code <QargX>} (for quotted arg)<br>
      * X must be a positiv integer.
      * In addition, if the text contains arguments, transform each "''" into "'".
      * @param text text to parse
@@ -216,15 +217,15 @@ public class EncodingManager {
             if (argMatcher.find()) {
                 Matcher numberMatcher = numberPattern.matcher(argMatcher.group());
                 numberMatcher.find();
-                s = s.replaceAll(argRegex, "{arg" + numberMatcher.group() + "}");
+                s = s.replaceAll(argRegex, "<arg" + numberMatcher.group() + ">");
             } else if (sQargMatcher.find()) {
                 Matcher numberMatcher = numberPattern.matcher(sQargMatcher.group());
                 numberMatcher.find();
-                s = s.replaceAll(sQargRegex, "{sQarg" + numberMatcher.group() + "}");
+                s = s.replaceAll(sQargRegex, "<sQarg" + numberMatcher.group() + ">");
             } else if (QargMatcher.find()) {
                 Matcher numberMatcher = numberPattern.matcher(QargMatcher.group());
                 numberMatcher.find();
-                s = s.replaceAll(QargRegex, "{Qarg" + numberMatcher.group() + "}");
+                s = s.replaceAll(QargRegex, "<Qarg" + numberMatcher.group() + ">");
             }
             if (splittedText.length > 1) { //contains arg, doubles quotes convert into simple quotes
                 splittedText[i] = s.replaceAll("''", "'");
@@ -238,17 +239,17 @@ public class EncodingManager {
     /**
      * Inversion of {@link #parseArguments(String)} method.
      * Recreate the arguments with the correct format like this:<br>
-     * {argX} -> {X}<br>
-     * '{argX}' -> '{X}'<br>
-     * ''{argX}'' -> ''{X}''
+     * {@code <argX> ->} {X}<br>
+     * {@code <sQargX> ->} '{X}'<br>
+     * {@code <QargX> ->} ''{X}''
      * @param text text to parse
      * @return the parsed text
      */
     public static String retrieveArguments(String text) {
         Pattern numberPattern = Pattern.compile("\\d+");
-        String argRegex = "(\\{arg\\d+\\})"; // {digit+} not preced or follow by '
-        String sQargRegex = "(\\{sQarg\\d+\\})"; // '{digit+}' not preced or follow by '
-        String QargRegex = "(\\{Qarg\\d+\\})"; // ''{digit+}''
+        String argRegex = "((?i)\\<arg\\d+\\>)"; // <arg digit+> not preced or follow by '
+        String sQargRegex = "((?i)\\<sQarg\\d+\\>)"; // '<arg digit+>' not preced or follow by '
+        String QargRegex = "((?i)\\<Qarg\\d+\\>)"; // ''<arg digit+>''
         Pattern argPattern = Pattern.compile(argRegex);
         Pattern sQargPattern = Pattern.compile(sQargRegex);
         Pattern QargPattern = Pattern.compile(QargRegex);
